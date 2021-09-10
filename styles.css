@@ -1,0 +1,169 @@
+@import url('https://fonts.googleapis.com/css2?family=Rampart+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Audiowide&display=swap');
+* {
+    box-sizing: border-box;
+}
+
+html {
+    min-height: 100vh;
+    cursor: url(Assets/Cursors/cur1054.cur), auto;
+    font-family: 'Rampart One', cursive;
+}
+
+body {
+    margin: 0;
+    background: radial-gradient(#616463, #2c2c2c);
+}
+
+.page-title {
+    color: #dbdad8;
+    font-weight: normal;
+    text-align: center;
+    font-size: 6em;
+    font-family: 'Audiowide', cursive;
+}
+
+.game-info-container {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: space-between;
+}
+
+.game-info {
+    color: #dbdad8;
+    font-size: 3.5em;
+}
+
+.game-container {
+    margin: 50px auto;
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    grid-gap: 10px;
+    justify-content: center;
+    perspective: 500px;
+}
+
+.card {
+    position: relative;
+    height: 175px;
+    width: 125px;
+}
+
+.card-face {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    border-width: 1px;
+    border-style: solid;
+    overflow: hidden;
+    transition: transform 500ms ease-in-out;
+    backface-visibility: hidden;
+}
+
+.card.visible .card-back {
+    transform: rotateY(-180deg);
+}
+
+.card.visible .card-front {
+    transform: rotateY(0);
+}
+
+.card.matched .card-front .card-value {
+    animation: dance 0.6s linear infinite 500ms;
+}
+
+.card-back {
+    background-color: rgb(19, 19, 19);
+    border-color: #ffffff;
+    transform: rotateY(0);
+}
+
+.div {
+    transition: all 0.25s ease-out;
+}
+
+.card-back:hover .div {
+    transform: scale(1.1);
+}
+
+.card-back:hover {
+    border-color: #02f502;
+}
+
+.card-value {
+    position: relative;
+    transition: transform 100ms ease-in-out;
+    transform: scale(.9);
+}
+
+.card-front:hover .card-value {
+    transform: scale(1);
+}
+
+.card-front {
+    background-color: #ffffff;
+    border-color: #333;
+    transform: rotateY(180deg);
+}
+
+.overlay-text {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 100;
+    display: none;
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: #ffffff;
+    transition: background-color 500ms, font-size 500ms;
+}
+
+.overlay-text-small {
+    font-size: .3em;
+}
+
+.overlay-text.visible {
+    display: flex;
+    animation: overlay-grow 500ms forwards;
+}
+
+@keyframes dance {
+    0%,
+    100% {
+        transform: rotate(0)
+    }
+    25% {
+        transform: rotate(-5deg)
+    }
+    75% {
+        transform: rotate(5deg)
+    }
+}
+
+@keyframes overlay-grow {
+    from {
+        background-color: rgba(0, 0, 0, 0);
+        font-size: 0;
+    }
+    to {
+        background-color: rgba(0, 0, 0, .8);
+        font-size: 10em;
+    }
+}
+
+@media (max-width: 600px) {
+    .game-container {
+        grid-template-columns: repeat(2, auto)
+    }
+    .game-info-container {
+        flex-direction: column;
+        align-items: center;
+    }
+}
